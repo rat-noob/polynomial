@@ -22,7 +22,7 @@ void Monom::setCoef(double cf) { coef = cf; }
 void Monom::setDeg(int xDeg, int yDeg, int zDeg) { degrees = pack(xDeg, yDeg, zDeg); }
 
 bool Monom::operator==(const Monom& other) const { return degrees == other.degrees; }
-bool Monom::operator!=(const Monom& other)const { return !(*this == other);/*доделать пон€ть*/  }
+bool Monom::operator!=(const Monom& other)const { return !(*this == other);}
 
 bool Monom::operator<(const Monom& other)const { return degrees < other.degrees; }
 bool Monom::operator>(const Monom& other)const { return other < *this; }
@@ -68,7 +68,6 @@ void Monom::printMonom() const {
         cout << "-";
     }
 
-    // ¬ывод переменных со степен€ми
     if (xDeg > 0) {
         cout << "x";
         if (xDeg > 1) cout << "^" << xDeg;

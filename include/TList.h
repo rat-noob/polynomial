@@ -28,7 +28,7 @@ public:
     TList(const TList& other) : head(nullptr), tail(nullptr), count(0) {
         Node* current = other.head;
         while (current) {
-            push_back(current->data);
+            push_back(current->val);
             current = current->next;
         }
     }
@@ -41,7 +41,7 @@ public:
             clear();
             Node* current = other.head;
             while (current) {
-                push_back(current->data);
+                push_back(current->val);
                 current = current->next;
             }
         }
@@ -77,7 +77,7 @@ public:
         if (empty()) throw std::out_of_range("List is empty");
 
         Node* temp = head;
-        T value = temp->data;
+        T value = temp->val;
 
         head = head->next;
         if (head) head->prev = nullptr;
@@ -92,7 +92,7 @@ public:
         if (empty()) throw std::out_of_range("List is empty");
 
         Node* temp = tail;
-        T value = temp->data;
+        T value = temp->val;
 
         tail = tail->prev;
         if (tail) tail->next = nullptr;
@@ -105,12 +105,12 @@ public:
 
     T& front() {
         if (empty()) throw std::out_of_range("List is empty");
-        return head->data;
+        return head->val;
     }
 
     T& back() {
         if (empty()) throw std::out_of_range("List is empty");
-        return tail->data;
+        return tail->val;
     }
 
     bool empty() const { return count == 0; }
@@ -119,7 +119,7 @@ public:
     void clear() {
         while (!empty()) pop_front();
     }
-    // 3. Простой итератор (для удобства обхода)
+    
     class Iterator {
         Node* ptr;
     public:

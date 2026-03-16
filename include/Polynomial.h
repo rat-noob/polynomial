@@ -10,7 +10,6 @@ class Polynomial {
 	void sortMonoms() {
         if (monoms.size() <= 1) return;
 
-        // Простая сортировка пузырьком для списка
         bool swapped;
         do {
             swapped = false;
@@ -20,7 +19,6 @@ class Polynomial {
 
             while (it2 != monoms.end()) {
                 if ((*it2).getPackDeg() < (*it1).getPackDeg()) {
-                    // Меняем местами значения
                     Monom temp = *it1;
                     *it1 = *it2;
                     *it2 = temp;
@@ -31,13 +29,11 @@ class Polynomial {
             }
         } while (swapped);
 	}
-    // Приведение подобных мономов
+  
     void combineLikeTerms() {
         if (monoms.size() <= 1) return;
 
-        sortMonoms();  // сначала сортируем
-
-        // Создаем временный список для результата
+        sortMonoms(); 
         TList<Monom> result;
 
         auto it = monoms.begin();
@@ -46,11 +42,9 @@ class Polynomial {
 
         while (it != monoms.end()) {
             if (current.getPackDeg() == (*it).getPackDeg()) {
-                // Одинаковые степени - складываем
                 current = current + *it;
             }
             else {
-                // Разные степени - сохраняем текущий и переходим к следующему
                 if (!current.isZero()) {
                     result.push_back(current);
                 }
@@ -59,7 +53,7 @@ class Polynomial {
             ++it;
         }
 
-        // Добавляем последний моном
+        
         if (!current.isZero()) {
             result.push_back(current);
         }
@@ -67,7 +61,7 @@ class Polynomial {
         monoms = result;
     }
 public:
-    // Конструкторы
+   
     Polynomial() = default;
 
     Polynomial(const Monom& m) {
@@ -78,35 +72,32 @@ public:
 
     Polynomial(const Polynomial& other) = default;
 
-    // Оператор присваивания
     Polynomial& operator=(const Polynomial& other) = default;
 
-    // Добавление монома
+    
     void addMonom(const Monom& m) {
         if (!m.isZero()) {
             monoms.push_back(m);
-            combineLikeTerms();  // автоматическое приведение подобных
+            combineLikeTerms();  
         }
     }
 
     void clear() {
         monoms.clear();
     }
-    // Количество мономов
+ 
     int getSize() const {
         return monoms.size();
     }
 
-    // Проверка на пустоту
+    
     bool isEmpty() const {
         return monoms.empty();
     }
 
-    // Оператор сложения полиномов
     Polynomial operator+(const Polynomial& other) const {
         Polynomial result = *this;
 
-        // Добавляем все мономы из other
         TList<Monom> temp = other.monoms;
         while (!temp.empty()) {
             result.monoms.push_back(temp.pop_front());
@@ -116,11 +107,9 @@ public:
         return result;
     }
 
-    // Оператор вычитания полиномов
     Polynomial operator-(const Polynomial& other) const {
         Polynomial result = *this;
 
-        // Добавляем все мономы из other с противоположным знаком
         TList<Monom> temp = other.monoms;
         while (!temp.empty()) {
             Monom m = temp.pop_front();
@@ -134,7 +123,6 @@ public:
         return result;
     }
 
-    // Оператор умножения полиномов
     Polynomial operator*(const Polynomial& other) const {
         Polynomial result;
 
@@ -166,6 +154,42 @@ public:
 
         return result;
     }
+    Polynomial operator-() const {
+        Polynomial result;
+
+        TList<Monom> temp = monoms;
+        while (!temp.empty()) {
+            Monom m = temp.pop_front();
+            result.monoms.push_back(Monom(-m.getCoef(),
+                m.getXDeg(),
+                m.getYDeg(),
+                m.getZDeg()));
+        }
+
+        return result;
+    }
+    bool operator==(const Polynomial& other) const {
+        if (monoms.size() != other.monoms.size()) return false;
+
+        TList<Monom> temp1 = monoms;
+        TList<Monom> temp2 = other.monoms;
+
+        while (!temp1.empty() && !temp2.empty()) {
+            Monom m1 = temp1.pop_front();
+            Monom m2 = temp2.pop_front();
+
+            if (m1.getPackDeg() != m2.getPackDeg() ||
+                std::abs(m1.getCoef() - m2.getCoef()) > 1e-10) {
+                return false;
+            }
+        }
+
+        return temp1.empty() && temp2.empty();
+    }
+
+    bool operator!=(const Polynomial& other) const {
+        return !(*this == other);
+    }
     double evaluate(double x, double y, double z) const {
         double result = 0.0;
 
@@ -176,7 +200,6 @@ public:
 
         return result;
     }
-    // Печать полинома
     void print() const {
         if (monoms.empty()) {
             std::cout << "0";
@@ -196,6 +219,7 @@ public:
             m.printMonom();
             first = false;
         }
+        cout << "\n";
     }
 
 };
