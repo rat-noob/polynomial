@@ -30,7 +30,7 @@ class Polynomial {
         } while (swapped);
 	}
   
-    void combineLikeTerms() {
+    /*void combineLikeTerms() {
         if (monoms.size() <= 1) return;
 
         sortMonoms(); 
@@ -59,7 +59,7 @@ class Polynomial {
         }
 
         monoms = result;
-    }
+    }*/
 public:
    
     Polynomial() = default;
@@ -76,10 +76,47 @@ public:
 
     
     void addMonom(const Monom& m) {
-        if (!m.isZero()) {
+        if (m.isZero()) return;
+        if (monoms.empty()) {
+            monoms.push_back(m);
+            return;
+        }
+        unsigned int packedDeg = m.getPackDeg();
+
+        auto it = monoms.begin();
+        size_t index = 0;
+
+        while (it != monoms.end()) {
+            unsigned int currentPacked = (*it).getPackDeg();
+            if (packedDeg == currentPacked) {
+                Monom newMonom = *it + m;  
+
+                if (newMonom.isZero()) {
+                    monoms.remove(index);
+                }
+                else {
+                    *it = newMonom;
+                }
+                return;
+            }
+            else if (packedDeg < currentPacked) {
+                monoms.insert(index, m);
+                return;
+            }
+            ++it;
+            ++index;
+        }
+        monoms.push_back(m);
+
+        
+        
+        
+        
+        
+       /* if (!m.isZero()) {
             monoms.push_back(m);
             combineLikeTerms();  
-        }
+        }*/
     }
 
     void clear() {
@@ -95,35 +132,51 @@ public:
         return monoms.empty();
     }
 
-    Polynomial operator+(const Polynomial& other) const {
-        Polynomial result = *this;
+    Polynomial operator+( Polynomial& other)  {
+        
+        Polynomial result;
 
-        TList<Monom> temp = other.monoms;
-        while (!temp.empty()) {
-            result.monoms.push_back(temp.pop_front());
+        auto it1 = monoms.begin();
+        auto it2 = other.monoms.begin();
+
+        while (it1 != monoms.end() && it2 != other.monoms.end()) {
+            if ((*it1).getPackDeg() < (*it2).getPackDeg()) {
+                result.monoms.push_back(*it1);
+                ++it1;
+            }
+            else if ((*it1).getPackDeg() > (*it2).getPackDeg()) {
+                result.monoms.push_back(*it2);
+                ++it2;
+            }
+            else {
+                Monom sum = *it1 + *it2;
+                if (!sum.isZero()) {
+                    result.monoms.push_back(sum);
+                }
+                ++it1;
+                ++it2;
+            }
+        }
+        while (it1 != monoms.end()) {
+            result.monoms.push_back(*it1);
+            ++it1;
+        }
+        while (it2 != other.monoms.end()) {
+            result.monoms.push_back(*it2);
+            ++it2;
         }
 
-        result.combineLikeTerms();
         return result;
     }
 
-    Polynomial operator-(const Polynomial& other) const {
-        Polynomial result = *this;
-
-        TList<Monom> temp = other.monoms;
-        while (!temp.empty()) {
-            Monom m = temp.pop_front();
-            result.monoms.push_back(Monom(-m.getCoef(),
-                m.getXDeg(),
-                m.getYDeg(),
-                m.getZDeg()));
-        }
-
-        result.combineLikeTerms();
-        return result;
+    Polynomial operator-( Polynomial& other)  {
+        
+        return *this + (-other);
+ 
     }
 
     Polynomial operator*(const Polynomial& other) const {
+        
         Polynomial result;
 
         TList<Monom> temp1 = monoms;
@@ -133,11 +186,9 @@ public:
             TList<Monom> temp2 = other.monoms;
             while (!temp2.empty()) {
                 Monom m2 = temp2.pop_front();
-                result.monoms.push_back(m1 * m2);
+                result.addMonom(m1*m2);
             }
         }
-
-        result.combineLikeTerms();
         return result;
     }
     Polynomial operator*(double scalar) const {

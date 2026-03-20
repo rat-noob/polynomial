@@ -119,6 +119,45 @@ public:
     void clear() {
         while (!empty()) pop_front();
     }
+    void insert(size_t index, const T& value) {
+        if (index > count) throw std::out_of_range("Index out of range");
+
+        if (index == 0) {
+            push_front(value);
+        }
+        else if (index == count) {
+            push_back(value);
+        }
+        else {
+            Node* current = head;
+            for (size_t i = 0; i < index - 1; i++) {
+                current = current->next;
+            }
+            current->next = new Node(value, current->next);
+            count++;
+        }
+    }
+
+    T remove(size_t index) {
+        if (index >= count) throw std::out_of_range("Index out of range");
+
+        if (index == 0) return pop_front();
+
+        Node* current = head;
+        for (size_t i = 0; i < index - 1; i++) {
+            current = current->next;
+        }
+
+        Node* temp = current->next;
+        T value = temp->val;
+        current->next = temp->next;
+
+        if (temp == tail) tail = current;
+
+        delete temp;
+        count--;
+        return value;
+    }
     
     class Iterator {
         Node* ptr;
