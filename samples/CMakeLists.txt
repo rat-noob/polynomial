@@ -1,7 +1,18 @@
 set(target sample)
 
-file(GLOB sources "*.cpp")
-file(GLOB headers "*.h*")
+file(GLOB SAMPLE_SOURCES "*.cpp")
 
-add_executable(${target} ${sources} ${headers})
-target_link_libraries(${target} ${MP3_LIBRARY})
+foreach(SAMPLE ${SAMPLE_SOURCES})
+    
+    get_filename_component(NAME ${SAMPLE} NAME_WE)
+    
+    
+    add_executable(${NAME} ${SAMPLE})
+    
+    
+    target_link_libraries(${NAME} ${MP3_LIBRARY})
+    
+    add_dependencies(${NAME} generate_parser)
+    
+    
+endforeach()
