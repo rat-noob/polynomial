@@ -3,7 +3,7 @@ set(target ${MP3_LIBRARY})
 file(GLOB hdrs "*.h*" "${MP3_INCLUDE}/*.h*")
 file(GLOB srcs "*.cpp")
 
-# Добавляем их в существующую библиотеку (НЕ создаём новую!)
+
 if(srcs)
     target_sources(${target} PRIVATE ${srcs})
 endif()

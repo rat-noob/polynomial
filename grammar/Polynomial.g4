@@ -7,7 +7,7 @@ stat:   ID '=' poly            # assign
     |   'exit'                 # exit      
     ;
 
-poly:   term (('+' | '-') term)* ;
+poly:   term (op = ('+' | '-') term)* ;
 
 term:   coefficient? variables 
     |   coefficient

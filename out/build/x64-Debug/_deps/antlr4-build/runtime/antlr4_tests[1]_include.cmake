@@ -1,0 +1,5 @@
+if(EXISTS "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-build/runtime/antlr4_tests[1]_tests.cmake")
+  include("D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-build/runtime/antlr4_tests[1]_tests.cmake")
+else()
+  add_test(antlr4_tests_NOT_BUILT antlr4_tests_NOT_BUILT)
+endif()

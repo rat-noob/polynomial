@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int tst() {
+int main() {
     srand(time(nullptr));
 
     int arr[15];

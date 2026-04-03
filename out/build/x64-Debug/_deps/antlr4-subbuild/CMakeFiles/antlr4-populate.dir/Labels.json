@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/CMakeFiles/antlr4-populate"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/CMakeFiles/antlr4-populate.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/CMakeFiles/antlr4-populate-complete.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-build.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-configure.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-download.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-install.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-mkdir.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-patch.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-test.rule"
+		},
+		{
+			"file" : "D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"antlr4-populate"
+		],
+		"name" : "antlr4-populate"
+	}
+}

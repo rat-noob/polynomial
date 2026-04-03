@@ -1,5 +1,5 @@
 
-// Generated from D:/UNN/c++/polynomial/polynomial/grammar/Polynomial.g4 by ANTLR 4.13.2
+// Generated from grammar/Polynomial.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -105,6 +105,7 @@ public:
 
   class  PolyContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *op = nullptr;
     PolyContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<TermContext *> term();

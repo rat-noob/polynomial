@@ -12,7 +12,7 @@ foreach(SAMPLE ${SAMPLE_SOURCES})
     
     target_link_libraries(${NAME} ${MP3_LIBRARY})
     
-    add_dependencies(${NAME} generate_parser)
+    #add_dependencies(${NAME} generate_parser)
     
     
 endforeach()

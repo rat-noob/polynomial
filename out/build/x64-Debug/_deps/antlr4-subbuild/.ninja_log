@@ -1,0 +1,21 @@
+# ninja log v6
+5	134	7964275433005879	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-mkdir	8f11dd8acecf13c4
+5	134	7964275433005879	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-mkdir	8f11dd8acecf13c4
+135	42442	7964275856244281	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-download	cb4cd90883c4d1ee
+135	42442	7964275856244281	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-download	cb4cd90883c4d1ee
+42442	42748	7964275856324067	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-update	3d6bbaa6dc4aac44
+42442	42748	7964275856324067	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-update	3d6bbaa6dc4aac44
+42748	42839	7964275860213667	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-patch	ad97077fb78a88d7
+42748	42839	7964275860213667	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-patch	ad97077fb78a88d7
+42839	42914	7964275860981619	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-configure	69ef380ef94037cc
+42839	42914	7964275860981619	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-configure	69ef380ef94037cc
+42914	42984	7964275861684814	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-build	a31095ff4e2eae78
+42914	42984	7964275861684814	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-build	a31095ff4e2eae78
+42984	43072	7964275862543559	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-install	72f486172d74e482
+42984	43072	7964275862543559	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-install	72f486172d74e482
+43072	43147	7964275863321479	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-test	90727fdb03e942a
+43072	43147	7964275863321479	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-test	90727fdb03e942a
+43147	43242	7964275864274023	CMakeFiles/antlr4-populate-complete	aacb174708378fdf
+43147	43242	7964275864274023	antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-done	aacb174708378fdf
+43147	43242	7964275864274023	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/CMakeFiles/antlr4-populate-complete	aacb174708378fdf
+43147	43242	7964275864274023	D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/_deps/antlr4-subbuild/antlr4-populate-prefix/src/antlr4-populate-stamp/antlr4-populate-done	aacb174708378fdf

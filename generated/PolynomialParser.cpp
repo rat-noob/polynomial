@@ -1,5 +1,5 @@
 
-// Generated from D:/UNN/c++/polynomial/polynomial/grammar/Polynomial.g4 by ANTLR 4.13.2
+// Generated from grammar/Polynomial.g4 by ANTLR 4.13.2
 
 
 #include "PolynomialVisitor.h"
@@ -362,11 +362,12 @@ PolynomialParser::PolyContext* PolynomialParser::poly() {
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
         setState(29);
+        antlrcpp::downCast<PolyContext *>(_localctx)->op = _input->LT(1);
         _la = _input->LA(1);
         if (!(_la == PolynomialParser::T__2
 
         || _la == PolynomialParser::T__3)) {
-        _errHandler->recoverInline(this);
+          antlrcpp::downCast<PolyContext *>(_localctx)->op = _errHandler->recoverInline(this);
         }
         else {
           _errHandler->reportMatch(this);

@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
-
-// Подключаем ANTLR runtime
-#include "antlr4-runtime.h"
+#include <vector>
+#include <any>  // Добавляем для std::any
 
 // Подключаем сгенерированные файлы
 #include "PolynomialLexer.h"
@@ -12,6 +11,7 @@
 #include "PolyBuilderVisitor.h"
 
 using namespace std;
+
 
 /**
  * @brief Разбор строки и создание объекта Polynomial
@@ -34,7 +34,8 @@ Polynomial parsePolynomial(const string& input) {
 
     // 6. Visitor строит полином
     PolyBuilderVisitor visitor;
-    Polynomial result = visitor.visitProg(tree).as<Polynomial>();
+    std::any resultAny = visitor.visitProg(tree);
+    Polynomial result = anyToPolynomial(resultAny);
 
     return result;
 }
@@ -57,7 +58,8 @@ int main() {
         try {
             Polynomial p = parsePolynomial(expr);
             cout << "Результат: ";
-            p.println();
+            p.print();
+            cout << endl;
         }
         catch (const exception& e) {
             cerr << "Ошибка: " << e.what() << endl;

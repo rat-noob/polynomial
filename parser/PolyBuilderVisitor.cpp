@@ -1,89 +1,102 @@
 #include "PolyBuilderVisitor.h"
 #include <iostream>
 #include <cmath>
+#include <any>
+#include <stdexcept>
 
 // ============================================
-// Реализация методов visitor
+// Вспомогательная функция для извлечения Polynomial из std::any
 // ============================================
-
-antlrcpp::Any PolyBuilderVisitor::visitProg(PolynomialParser::ProgContext* ctx) {
-    Polynomial result;
-
-    // Проходим по всем инструкциям
-    for (auto stat : ctx->stat()) {
-        result = visit(stat).as<Polynomial>();
+Polynomial anyToPolynomial(const std::any& value) {
+    try {
+        return std::any_cast<Polynomial>(value);
     }
-
-    return result;
+    catch (const std::bad_any_cast& e) {
+        throw std::runtime_error("Failed to cast to Polynomial");
+    }
 }
 
-antlrcpp::Any PolyBuilderVisitor::visitAssign(PolynomialParser::AssignContext* ctx) {
-    // Получаем имя переменной
+// ============================================
+// Реализация методов
+// ============================================
+
+std::any PolyBuilderVisitor::visitProg(PolynomialParser::ProgContext* ctx) {
+    Polynomial result;
+    for (auto stat : ctx->stat()) {
+        auto anyResult = visit(stat);
+        result = anyToPolynomial(anyResult);
+    }
+    return std::make_any<Polynomial>(result);
+}
+
+std::any PolyBuilderVisitor::visitAssign(PolynomialParser::AssignContext* ctx) {
     std::string id = ctx->ID()->getText();
-
-    // Вычисляем полином справа от "="
-    Polynomial value = visit(ctx->poly()).as<Polynomial>();
-
-    // Сохраняем в хранилище
+    auto anyValue = visit(ctx->poly());
+    Polynomial value = anyToPolynomial(anyValue);
     variables[id] = value;
-
-    return value;
+    return std::make_any<Polynomial>(value);
 }
 
-antlrcpp::Any PolyBuilderVisitor::visitPrintExpr(PolynomialParser::PrintExprContext* ctx) {
-    // Просто вычисляем полином
+std::any PolyBuilderVisitor::visitPrintExpr(PolynomialParser::PrintExprContext* ctx) {
     return visit(ctx->poly());
 }
 
-antlrcpp::Any PolyBuilderVisitor::visitPoly(PolynomialParser::PolyContext* ctx) {
+std::any PolyBuilderVisitor::visitPoly(PolynomialParser::PolyContext* ctx) {
     if (ctx->term().empty()) {
-        return Polynomial();
+        return std::make_any<Polynomial>();
     }
 
-    // Начинаем с первого терма
-    Polynomial result = visit(ctx->term(0)).as<Polynomial>();
+    // Получаем первый терм
+    auto anyFirst = visit(ctx->term(0));
+    Polynomial result = anyToPolynomial(anyFirst);
 
-    // Обрабатываем остальные термы
-    for (size_t i = 1; i < ctx->term().size(); i++) {
-        // Получаем знак оператора (между термами)
-        std::string op = ctx->getChild(2 * i - 1)->getText();
-        Polynomial nextTerm = visit(ctx->term(i)).as<Polynomial>();
+    // Проходим по детям, чтобы найти операторы
+    // Структура: term(0), '+', term(1), '-', term(2), ...
+    int termIndex = 1;
+    for (size_t i = 0; i < ctx->children.size(); i++) {
+        auto child = ctx->children[i];
+        std::string text = child->getText();
 
-        if (op == "+") {
-            result = result + nextTerm;
-        }
-        else {  // op == "-"
-            result = result - nextTerm;
+        // Если это оператор (+ или -)
+        if (text == "+" || text == "-") {
+            // Получаем следующий терм
+            if (termIndex < ctx->term().size()) {
+                auto anyNext = visit(ctx->term(termIndex));
+                Polynomial nextTerm = anyToPolynomial(anyNext);
+
+                if (text == "+") {
+                    result = result + nextTerm;
+                }
+                else {
+                    result = result - nextTerm;
+                }
+                termIndex++;
+            }
         }
     }
 
-    return result;
+    return std::make_any<Polynomial>(result);
 }
 
-antlrcpp::Any PolyBuilderVisitor::visitTerm(PolynomialParser::TermContext* ctx) {
+std::any PolyBuilderVisitor::visitTerm(PolynomialParser::TermContext* ctx) {
     double coeff = 1.0;
     int xDeg = 0, yDeg = 0, zDeg = 0;
 
-    // Обработка знака
-    if (ctx->sign()) {
-        if (ctx->sign()->getText() == "-") {
-            coeff = -1.0;
-        }
-    }
-
-    // Обработка коэффициента
+    // Обработка коэффициента (если есть)
     if (ctx->coefficient()) {
-        coeff *= std::stod(ctx->coefficient()->getText());
+        std::string coeffStr = ctx->coefficient()->getText();
+        coeff = std::stod(coeffStr);
     }
 
-    // Обработка переменных
+    // Обработка переменных (если есть)
     if (ctx->variables()) {
         for (auto varCtx : ctx->variables()->var()) {
             char var = varCtx->VAR()->getText()[0];
             int deg = 1;
 
-            if (varCtx->exponent) {
-                deg = std::stoi(varCtx->exponent->getText());
+            // Проверяем, есть ли степень (NUM после ^)
+            if (varCtx->NUM()) {
+                deg = std::stoi(varCtx->NUM()->getText());
             }
 
             switch (var) {
@@ -96,12 +109,11 @@ antlrcpp::Any PolyBuilderVisitor::visitTerm(PolynomialParser::TermContext* ctx) 
 
     // Если коэффициент нулевой, возвращаем пустой полином
     if (coeff == 0.0) {
-        return Polynomial();
+        return std::make_any<Polynomial>();
     }
 
-    // Создаём моном и полином
     Monom monom(coeff, xDeg, yDeg, zDeg);
-    return Polynomial(monom);
+    return std::make_any<Polynomial>(Polynomial(monom));
 }
 
 Polynomial PolyBuilderVisitor::getVariable(const std::string& name) const {

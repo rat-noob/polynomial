@@ -1,0 +1,15 @@
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/CMakeFiles/Polynomial.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/CMakeFiles/package.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/CMakeFiles/package_source.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/src/CMakeFiles/package.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/src/CMakeFiles/package_source.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/list.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/test_antlr.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/package.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/package_source.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/edit_cache.dir
+D:/UNN/c++/polynomial/polynomial/out/build/x64-Debug/samples/CMakeFiles/rebuild_cache.dir
