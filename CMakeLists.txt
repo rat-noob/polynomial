@@ -61,9 +61,9 @@ target_include_directories(${MP3_LIBRARY} PUBLIC
 # Линкуем ANTLR
 target_link_libraries(${MP3_LIBRARY} ${ANTLR_LIB}/antlr4-runtime.lib)
 
-# ============================================
+
 # Добавление поддиректорий
-# ============================================
+
 add_subdirectory(src)
 #add_subdirectory(test)
 add_subdirectory(samples)
